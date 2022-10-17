@@ -87,3 +87,74 @@ function kgToLbs(weight: number | string): number {
 
 kgToLbs(10);
 kgToLbs("10Kg");
+
+// Intersection types
+
+// let weight2: number & string;
+
+type Draggable = {
+  drag: () => void;
+};
+type Resizable = {
+  resize: () => void;
+};
+
+type UIWidget = Draggable & Resizable;
+
+let textBox: UIWidget = {
+  drag: () => {},
+  resize: () => {},
+};
+
+// Literal Types
+
+// Literal (exact, specific)
+
+// let quantity: 50 | 100 = 50;
+
+type Quantity = 50 | 100;
+
+let quantity: Quantity = 100;
+
+type Metric = "cm" | "inch";
+
+// Nullable Types
+
+function greet(name: string | null | undefined) {
+  if (name) console.log(name.toUpperCase());
+  else console.log("Hola!");
+}
+
+greet(null);
+greet(undefined);
+
+//Optional Chaining
+
+type Customer = {
+  birthdate: Date;
+};
+
+function getCustomer(id: number): Customer | null {
+  return id === 0 ? null : { birthdate: new Date() };
+}
+
+let customer = getCustomer(0);
+// optional property access operator
+console.log(customer?.birthdate);
+console.log(customer?.birthdate?.getFullYear());
+
+// Optional element access operator
+
+// if(customer !== null && customer !== undefined)
+//      customers[0];
+
+// or "cusromers?.[0]"
+
+// Optional call
+
+// let log: any = (message: string) => console.log(message);
+let log: any = null;
+
+log?.("jd");
+
+// ?. we use this so this code will only be executed only if log is referencing to real function
